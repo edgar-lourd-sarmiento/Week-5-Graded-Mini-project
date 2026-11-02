@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap');
+@import 'tailwindcss';
+
+@layer base {
+  body {
+    min-width: 320px;
+    min-height: 100vh;
+    font-family: 'DM Sans', sans-serif;
+    background: #f7f5f8;
+  }
+
+  button,
+  select {
+    cursor: pointer;
+  }
+
+  button:focus-visible,
+  a:focus-visible,
+  input:focus-visible,
+  select:focus-visible {
+    outline: 2px solid #9b789e;
+    outline-offset: 2px;
+  }
+}
