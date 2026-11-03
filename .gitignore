@@ -1,0 +1,12 @@
+# Dependencies
+node_modules
+
+# Local build output (GitHub Pages uses /root)
+dist
+
+# Logs and OS files
+*.log
+.DS_Store
+
+# Vite
+.vite

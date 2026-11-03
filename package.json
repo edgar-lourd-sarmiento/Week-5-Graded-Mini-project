@@ -5,9 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && cp root/index.html root/404.html && touch root/.nojekyll",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "deploy": "if [ \"$(git rev-parse --abbrev-ref HEAD)\" != develop ]; then echo 'Deploy is only allowed from the develop branch'; exit 1; fi && npm run build"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.3",
@@ -25,6 +26,7 @@
     "eslint": "^10.13.0",
     "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-react-refresh": "^0.5.7",
+    "develop": "^6.3.0",
     "globals": "^17.13.0",
     "vite": "^8.3.5"
   }
