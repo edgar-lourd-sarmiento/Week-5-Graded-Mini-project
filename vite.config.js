@@ -5,7 +5,7 @@ export default defineConfig({
   plugins: [react()],
   base: '/Week-5-Graded-Mini-project/',
   build: {
-    outDir: 'root',
+    outDir: 'docs',
     emptyOutDir: true,
   },
 })
