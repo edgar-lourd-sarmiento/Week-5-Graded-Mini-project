@@ -1,9 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { fetchTasks } from '../tasks'
 import { Link } from 'react-router-dom'
-import { useQuery } from '@tanstack/react-query'
-import { fetchTasks } from '../tasks'
-
 
 function Dashboard() {
   const {
