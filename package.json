@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && cp docs/index.html docs/404.html && touch docs/.nojekyll",
+    "build": "vite build && cp root/index.html root/404.html && touch root/.nojekyll",
     "lint": "eslint .",
     "preview": "vite preview",
     "deploy": "if [ \"$(git rev-parse --abbrev-ref HEAD)\" != develop ]; then echo 'Deploy is only allowed from the develop branch'; exit 1; fi && npm run build"

@@ -1,7 +1,7 @@
 # Dependencies
 node_modules
 
-# Local build output (GitHub Pages uses /docs)
+# Local build output (GitHub Pages uses /root)
 dist
 
 # Logs and OS files
