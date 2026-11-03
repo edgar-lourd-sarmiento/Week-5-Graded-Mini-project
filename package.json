@@ -4,10 +4,11 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-  "dev": "vite",
-  "build": "vite build && cp docs/index.html docs/404.html && touch docs/.nojekyll",
-  "lint": "eslint .",
-  "preview": "vite preview"
+    "dev": "vite",
+    "build": "vite build && cp dist/index.html dist/404.html && touch dist/.nojekyll",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    "deploy": "npm run build"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.3",
