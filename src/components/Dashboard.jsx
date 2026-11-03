@@ -36,12 +36,12 @@ function Dashboard() {
         </div>
 
         <div className="overview-card">
-        {stats.map((stat) => (
+          {stats.map((stat) => (
               <div key={stat.label}>
                 <strong>{stat.value}</strong>
                 <span>Tasks loaded from JSONPlaceholder</span>
               </div>
-            ))}
+          ))}
         </div>
       </section>
     </div>
