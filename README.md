@@ -1,16 +1,61 @@
-# React + Vite
+# TaskBoard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React + Vite task board with routing, stats, and TanStack Query.
 
-Currently, two official plugins are available:
+## Prerequisites
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Install **Node.js** first. `npm` is included with it.
 
-## React Compiler
+## Install dependencies
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Install packages in this order.
 
-## Expanding the ESLint configuration
+### 1. React
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```bash
+npm install react react-dom
+```
+
+### 2. Vite (dev server and React plugin)
+
+```bash
+npm install -D vite @vitejs/plugin-react
+```
+
+### 3. React Router
+
+```bash
+npm install react-router-dom
+```
+
+### 4. Tailwind CSS
+
+```bash
+npm install tailwindcss @tailwindcss/vite
+```
+
+### 5. TanStack Query
+
+```bash
+npm install @tanstack/react-query
+```
+
+### 6. Remaining tooling (ESLint)
+
+```bash
+npm install -D eslint @eslint/js eslint-plugin-react-hooks eslint-plugin-react-refresh globals @types/react @types/react-dom
+```
+
+### Or install everything at once
+
+If the project already has a `package.json`, one command installs all of the above:
+
+```bash
+npm install
+```
+
+## Run the app
+
+```bash
+npm run dev
+```
