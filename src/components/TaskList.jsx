@@ -1,58 +1,25 @@
-import { useQuery } from '@tanstack/react-query'
-import { useMemo, useState } from 'react'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
+import { useEffect, useMemo, useState } from 'react'
+import { fetchTasks, people } from '../tasks'
 
-const API_URL = 'https://jsonplaceholder.typicode.com/todos'
-
-const people = [
-  'Leanne Graham',
-  'Ervin Howell',
-  'Clementine Bauch',
-  'Patricia Lebsack',
-  'Chelsey Dietrich',
-]
-
-function formatTask(todo) {
-  return {
-    id: todo.id,
-    title: todo.title,
-    assignee: people[(todo.userId - 1) % people.length],
-    status: todo.completed ? 'Done' : 'Open',
-  }
-}
-
-async function fetchTasks({ signal }) {
-  const response = await fetch(API_URL, {
-    signal,
-  })
-
-  if (!response.ok) {
-    throw new Error('Something went wrong loading tasks. Please try again.')
-  }
-
-  const todos = await response.json()
-
-  return todos.map(formatTask)
-}
+const PAGE_SIZE = 50
 
 function TaskList() {
-  const [statusOverrides, setStatusOverrides] = useState({})
+  const queryClient = useQueryClient()
   const [query, setQuery] = useState('')
   const [status, setStatus] = useState('All')
   const [user, setUser] = useState('All')
+  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE)
 
   const {
-    data: apiTasks = [],
+    data: tasks = [],
     isPending,
     error,
   } = useQuery({
     queryKey: ['tasks'],
     queryFn: fetchTasks,
+    staleTime: Infinity,
   })
-
-  const tasks = apiTasks.map((task) => ({
-    ...task,
-    status: statusOverrides[task.id] ?? task.status,
-  }))
 
   const filteredTasks = useMemo(() => {
     return tasks.filter((task) => {
@@ -70,23 +37,34 @@ function TaskList() {
     })
   }, [tasks, query, status, user])
 
+  useEffect(() => {
+    setVisibleCount(PAGE_SIZE)
+  }, [query, status, user])
+
+  const visibleTasks = filteredTasks.slice(0, visibleCount)
+  const hasMore = visibleCount < filteredTasks.length
+
   const doneCount = tasks.filter(
     (task) => task.status === 'Done',
   ).length
 
   function toggleTask(id) {
-    const task = tasks.find(
-      (currentTask) => currentTask.id === id,
+    queryClient.setQueryData(['tasks'], (current = []) =>
+      current.map((task) =>
+        task.id === id
+          ? {
+              ...task,
+              status: task.status === 'Done' ? 'Open' : 'Done',
+            }
+          : task,
+      ),
     )
+  }
 
-    if (!task) {
-      return
-    }
-
-    setStatusOverrides((current) => ({
-      ...current,
-      [id]: task.status === 'Done' ? 'Open' : 'Done',
-    }))
+  function showMore() {
+    setVisibleCount((current) =>
+      Math.min(current + PAGE_SIZE, filteredTasks.length),
+    )
   }
 
   return (
@@ -158,7 +136,8 @@ function TaskList() {
 
       <div className="list-meta">
         <strong>
-          Showing {filteredTasks.length} of {tasks.length} tasks
+          Showing {visibleTasks.length} of {filteredTasks.length}{' '}
+          filtered tasks ({tasks.length} total)
         </strong>
         <span>{doneCount} completed</span>
       </div>
@@ -176,7 +155,7 @@ function TaskList() {
           </p>
         )}
 
-        {filteredTasks.map((task) => (
+        {visibleTasks.map((task) => (
           <article className="task-card" key={task.id}>
             <button
               className={`task-checkbox ${
@@ -220,6 +199,18 @@ function TaskList() {
             </p>
           )}
       </div>
+
+      {hasMore && (
+        <div className="load-more-wrap">
+          <button
+            type="button"
+            className="primary-button load-more-button"
+            onClick={showMore}
+          >
+            Show {Math.min(PAGE_SIZE, filteredTasks.length - visibleCount)} more
+          </button>
+        </div>
+      )}
     </div>
   )
 }
