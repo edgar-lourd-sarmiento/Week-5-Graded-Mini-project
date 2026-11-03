@@ -1,7 +1,14 @@
-import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
-  plugins: [react()],
-  base: '/Week-5-Graded-Mini-project/',
+  plugins: [
+    react(),
+    tailwindcss(),
+  ],
+  base: '/mini-project-1/',
+  build: {
+    outDir: 'docs',
+  },
 })
