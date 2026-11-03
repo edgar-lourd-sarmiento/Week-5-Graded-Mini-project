@@ -9,7 +9,7 @@ import './App.css'
 function App() {
   return (
     <main className="app">
-      <section className="app-shell">
+      <section className="browser-shell">
         <header className="site-header">
           <NavLink className="logo" to="/">
             Task<span>Board</span>
