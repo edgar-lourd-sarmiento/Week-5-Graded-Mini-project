@@ -3,5 +3,5 @@ import { defineConfig } from 'vite'
 
 export default defineConfig({
   plugins: [react()],
-  base: '/mini-project-1/',
+  base: '/Week-5-Graded-Mini-project/',
 })
