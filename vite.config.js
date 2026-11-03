@@ -7,7 +7,7 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
-  base: '/mini-project-1/',
+  base: '/Week-5-Graded-Mini-project/',
   build: {
     outDir: 'docs',
   },
