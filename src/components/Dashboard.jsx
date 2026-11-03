@@ -1,6 +1,21 @@
 import { Link } from 'react-router-dom'
+import { useQuery } from '@tanstack/react-query'
+import { fetchTasks } from '../tasks'
+
 
 function Dashboard() {
+  const {
+    data: tasks = [],
+  } = useQuery({
+    queryKey: ['tasks'],
+    queryFn: fetchTasks,
+    staleTime: Infinity,
+  })
+  const total = tasks.length
+  const stats = [
+    { value: total, label: 'Total' },
+  ]
+
   return (
     <div className="page-content">
       <section className="dashboard-hero">
@@ -22,8 +37,12 @@ function Dashboard() {
         </div>
 
         <div className="overview-card">
-          <strong>10</strong>
-          <span>Tasks loaded from JSONPlaceholder</span>
+          {stats.map((stat) => (
+            <div key={stat.label}>
+            <strong>{stat.value}</strong>
+            <span>Tasks loaded from JSONPlaceholder</span>
+            </div>
+          ))}
         </div>
       </section>
     </div>
