@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && cp doc/index.html doc/404.html && touch doc/.nojekyll",
+    "build": "vite build && cp docs/index.html docs/404.html && touch docs/.nojekyll",
     "lint": "eslint .",
     "preview": "vite preview",
     "deploy": "npm run build"
