@@ -18,7 +18,8 @@ function TaskList() {
   } = useQuery({
     queryKey: ['tasks'],
     queryFn: fetchTasks,
-    staleTime: Infinity,
+    staleTime: 60_000,
+    retry: false,
   })
 
   const filteredTasks = useMemo(() => {
