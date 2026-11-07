@@ -8,11 +8,12 @@ function Dashboard() {
     } = useQuery({
       queryKey: ['tasks'],
       queryFn: fetchTasks,
-      staleTime: Infinity,
+      staleTime: 60_000,
+      retry: false,
       })
   const total = tasks.length
   const stats = [
-    { value: total, label: 'Total' },
+    { value: total, label: 'Total' }
   ]
 
   return (
