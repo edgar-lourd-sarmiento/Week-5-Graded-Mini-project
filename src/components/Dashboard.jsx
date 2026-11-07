@@ -5,11 +5,11 @@ import { Link } from 'react-router-dom'
 function Dashboard() {
   const {
     data: tasks = [],
-  } = useQuery({
-    queryKey: ['tasks'],
-    queryFn: fetchTasks,
-    staleTime: Infinity,
-  })
+    } = useQuery({
+      queryKey: ['tasks'],
+      queryFn: fetchTasks,
+      staleTime: Infinity,
+      })
   const total = tasks.length
   const stats = [
     { value: total, label: 'Total' },
