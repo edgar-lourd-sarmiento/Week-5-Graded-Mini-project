@@ -133,8 +133,12 @@
 }
 
 .list-message {
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
+
 .overview-card strong {
   display: block;
   color: #78567d;

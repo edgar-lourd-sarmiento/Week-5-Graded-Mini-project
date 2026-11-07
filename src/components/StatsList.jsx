@@ -9,7 +9,8 @@ function StatsList() {
   } = useQuery({
     queryKey: ['tasks'],
     queryFn: fetchTasks,
-    staleTime: Infinity,
+    staleTime: 60_000,
+    retry: false,
   })
 
   const total = tasks.length
